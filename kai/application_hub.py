@@ -11,13 +11,16 @@ from kai.report import Report
 from kai.scm import GitDiff
 
 class Application:
-    def __init__(self, name, report, repo, 
-                initial_branch, solved_branch):
+    def __init__(self, name, report, repo,
+                initial_branch, solved_branch, commitId=None, timestamp=None):
         self.name = name
         self.report = report
         self.repo = repo
         self.initial_branch = initial_branch
         self.solved_branch = solved_branch
+        self.commitId = commitId
+        self.timestamp = timestamp
+
         
 class ApplicationHub:
     def __init__(self):
@@ -114,7 +117,13 @@ class ApplicationHub:
                 ## Example of the YAML report data for an incident
                 ##  incidents:
                 ##  - uri: file:///tmp/source-code/src/main/webapp/WEB-INF/web.xml
-                ##    message: "\n Session replication ensures that client sessions are not disrupted by node failure. Each node in the cluster shares information about ongoing sessions and can take over sessions if another node disappears. In a cloud environment, however, data in the memory of a running container can be wiped out by a restart.\n\n Recommendations\n\n * Review the session replication usage and ensure that it is configured properly.\n * Disable HTTP session clustering and accept its implications.\n * Re-architect the application so that sessions are stored in a cache backing service or a remote data grid.\n\n A remote data grid has the following benefits:\n\n * The application is more scaleable and elastic.\n * The application can survive EAP node failures because a JVM failure does not cause session data loss.\n * Session data can be shared by multiple applications.\n "
+                ##    message: "\n Session replication ensures that client sessions are not disrupted by node failure. 
+                ##             Each node in the cluster shares information about ongoing sessions and can take over sessions
+                ##             if another node disappears. In a cloud environment, however, data in the memory of a running container can be wiped out by a restart.\n\n
+                ##             Recommendations\n\n * Review the session replication usage and ensure that it is configured properly.\n * 
+                ##             Disable HTTP session clustering and accept its implications.\n * Re-architect the application so that sessions are stored in a cache backing service or a remote data grid.\n\n
+                ##             A remote data grid has the following benefits:\n\n * The application is more scaleable and elastic.\n * The application can survive EAP node failures
+                ##             because a JVM failure does not cause session data loss.\n * Session data can be shared by multiple applications.\n "
                 ##    variables:
                 ##      data: distributable
                 ##      innerText: ""
@@ -143,4 +152,20 @@ class ApplicationHub:
                         'message': incident.get('message', None)
                     }
                     self.cached_violations[ruleset][violation_name][a.name][file_path].append(entry)    
+
+    # todo query hub api for the application
+    # THIS IS IMCOMPLETE. TREAT IT AS A STUB FOR NOW
+    def get_app_from_konveyor_hub(self, name):
+        # query hub api for the application
+        # return the application
+        if self.applications[name] is None:
+            return None
+        else:
+            app = self.applications[name]
+            # todo: query hub api for the application
+            # populate the application with the hub api data
+            return app
+        
+
+    
                     

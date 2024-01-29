@@ -6,6 +6,8 @@ from typing import Optional, List
 
 from kai.report import Report
 from kai.result import LLMResult
+from kai.application_hub import Application, ApplicationHub
+from kai.util import Util
 
 app = typer.Typer()
 
@@ -64,3 +66,15 @@ def generate(path_to_report: str, path_to_source: str, example_initial_branch: s
     llmResult.parse_report(path_to_report)
     llmResult.process(path_to_output, model, limit_rulesets, limit_violations)
     print(f'Completed processing, output written to {path_to_output}\n')
+
+@app.command()
+def load_incident_store(apps: list):
+    """
+    Load the incident store with the given applications
+    write the cached_violations to a file for later use
+    """
+    cached_violations = Util.load_app_cached_violation(apps)
+    print(f"Incident store: {cached_violations} \n")
+    Util.write_cached_violations(cached_violations)
+        
+

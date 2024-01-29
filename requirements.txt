@@ -133,3 +133,4 @@ webencodings==0.5.1
 websocket-client==1.6.4
 widgetsnbextension==4.0.9
 yarl==1.9.2
+-e git+https://github.com/konveyor-ecosystem/kai.git@81f29383a94fc99d2f3b765f6d18b919f8f10029#egg=kai
