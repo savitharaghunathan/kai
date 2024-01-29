@@ -1,3 +1,5 @@
+# This file contains utility functions that are used by the kai application
+
 import os
 import yaml
 
@@ -5,7 +7,6 @@ from kai.application_hub import Application, ApplicationHub
 from kai.report import Report
 
 class Util:
-
     def fetch_output_and_app_yaml(app_name):
         """
         Fetches the output.yaml file path and loads the contents of app.yaml
