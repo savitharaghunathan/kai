@@ -133,3 +133,5 @@ webencodings==0.5.1
 websocket-client==1.6.4
 widgetsnbextension==4.0.9
 yarl==1.9.2
+
+#-e git+https://github.com/savitharaghunathan/kai.git@e486312d96542c34520a6d507352bf15d7e06b89#egg=kai
